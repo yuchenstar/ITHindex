@@ -1,0 +1,44 @@
+
+/* Colour for elements in dropdown menu*/
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #1F1F1F;
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  outline: 0;
+  background-color: #1F1F1F;
+}
+
+/* Text col for hyperlinks etc..*/
+a {
+  color: #00A064;
+  text-decoration: none;
+}
+
+/* Text col when hoover over tabs*/
+a:hover,
+a:focus {
+  color: #00A064;
+  text-decoration: underline;
+}
+
+/* Change header text to imported font */
+* {
+  font-family: "Source Sans Pro",Calibri,Candara,Arial,sans-serif;
+}
+
+.box .box-solid .box-black > .box-header {
+    color: #fff;
+    background: #111111;
+    background-color: #111111;
+    display: block;
+    padding: 10px;
+    position: relative;
+}
+

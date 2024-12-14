@@ -1,0 +1,72 @@
+---
+title: "About"
+author: "Wenchuan Xie"
+date: "6/28/2024"
+output: html_document
+# runtime: shiny
+link-citations: yes
+bibliography: ../data/lib/ITHindex.bib
+csl: ../data/lib/cancer-discovery.csl
+---
+
+**1. What is the intra-tumor heterogeneity (ITH)?**
+
+Tumor heterogeneity contributes to tumor progression, metastasis and a main cause of immune evasion and therapeutic resistance in many solid tumor types. It can be classified as: intertumor heterogeneity, intersite heterogeneity and intratumor heterogeneity. Understanding the roots of tumor heterogeneity is critical in overcoming tumor relapse and chemoresistance. Here, we focus on intratumor heterogeneity (ITH), which refers to differences between cells within a tumor mass, the extent of which has been demonstrated through recent multiregion next generation sequencing analyses. High ITH is associated with poor outcome in many solid tumor types, and it may include heterogeneity for genetic, transcriptomic, proteomic and epigenetic features.
+
+**2. How to quantify intratumor heterogeneity?**
+
+Intratumor heterogeneity can be quantified by using various measurements based on the multi-omics data. Previous studies have developed a variety of methods for multi-dimensional evaluation of ITH, based on the profiling of genomic, transcriptomic and epigenetic features from single/multi-regional sequencing, spatial transcriptomics, or single-cell sequencing.
+
+**3. What are the mathematical methods used to infer ITH?**
+
+Mathematical models for quantification of ITH can be classified into four distinct categories by the complexity and underlying model assumptions: descriptive statistics, information theory (entropy), and spatial statistics (distance), as well as radiomic metrics on texture analysis, fractal analysis and wavelets (radiomic metrics are not integrated in ITHindex).
+
+**4. What is the Jaccard similarity index?**
+
+The Jaccard similarity index compares members for two sets to see which members are shared and which are distinct. It's a measure of similarity for the two sets of data, with a range from 0% to 100%. The higher the percentage, the more similar the two populations. The formula to find the Index is:
+
+Jaccard Index = (the number in both sets) / (the number in either set) \* 100
+
+**5. What is the mutant-allele tumor heterogeneity (MATH)?**
+
+MATH is a descriptive statistics metric to quantify ITH based on the VAF distribution across all mutated loci. MATH score is calculated by ```inferHeterogenetiy``` function ("maftools" package in R).
+
+**6. What is the proportion of clonality (pClonality)**
+
+The Cancer cell fraction (CCF) is the fraction of cancer cells from the sequenced sample carrying a set of SNVs, which can be inferred from PyClone or SciClone", "Generally, events appearing in all cancer cells (CCF = 100%) are considered clonal. However, this definition is not entirely consistent in other articles. Here, we define a parameter to define a cutoff of CCF to classify a mutation as clonal, and the others are subclonal. The proportion of clonality (pClonality) is calculated based on proportion of clonal in a sample.
+
+**7. What is the Shannon entropy?**
+
+The Shannon entropy is a measure of diversity that quantifies the uncertainty in assigning the species identity of an individual in a population. It is calculated as:
+
+$H = -∑ Pi*ln(Pi)$
+
+where Pi is the frequency of species i in the population.
+
+**8. What is the proportion of late-stage mutations (pLM)?**
+
+The proportion of late-stage mutations (pLM) is calculated based on proportion of late mutations inferred from EstimateClonality.
+
+**9. What is the EstimateClonality?**
+
+The [EstimateClonality](https://github.com/b-niu/EstimateClonality) is an R package which uses to determine the timing of SNVs for all mutations. The CCF of SNVs based on tumor purity and CNA profiles and mutation copy number. Early and late mutations were defined as a mutation copy number of \>1 and \<=1, respectively, based on the binomial test implemented in the package.
+
+**10. What is the Copy Number intra-tumor Heterogeneity (CNH+ [CNHplus])?**
+
+van Dijk et al introduced a single-sample method for estimating the ITH from Copy Number Variation (CNV) data, dubbed Copy Number Heterogeneity. The ACN profiles, recovered by CNH, may contain segments with the negative number of copies; cf. (Grendár et al. 2022). CNHplus corrects this omission in CNH as it imposes the non-negativity constraint on ACN of tumor in searching for the solution of the optimization problem that defines CNH. The source code can be found in [here](https://github.com/grendar/CNHplus).
+
+**11. What is the cancer cell fraction (CCF)?**
+
+The CCF, also known as the cellular prevalence or the mutation cellularity, is a proportion of cancer cells in a tumor containing the single-nucleotide variant, is commonly used to quantify tumor heterogeneity and evolution.
+
+**12. What is the Diversity score?**
+
+Diversity score is a measurement of ITH, which was calculated based on the gene expression profiles of signle cell within a tumor. PCA was applied in the scRNAseq data, and top N (default 30) PCs was selected, the diversity score of a tumor is aclculated as the average distance of all cells within the tumor to the centroid.
+
+**13. What is the methylation entropy?**
+
+The methylation entropy is used to estimate the information content stored in a given set of CpG sites. Entropy is minimized when the methylation levels of all sites are either 0% or 100% and maximized when all of them are 50%. It is calculated as:
+
+$Entropy =1/(N∗log(1/2))*∑[MFi∗log(MFi)+(1−MFi)∗log(1−MFi)]$
+
+where MFi is the methylation fraction (beta value) of the i-th methylation marker(CpG site) and N is the number of markers.
