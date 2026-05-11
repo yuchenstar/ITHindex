@@ -59,14 +59,20 @@ lpy_MPD <- function(data,meta,pca=F, nPCs=2, method = 'euclidean',show_progress 
   }
 
   phen <- meta
-  pids <- unique(phen$PatientID)
-
+  # 每个患者/样本至少要有2个以上Sample
+  # phen_stat <- phen %>%
+  #   dplyr::group_by(PatientID) %>%
+  #   dplyr::summarise(Sample_Num = dplyr::n())
+  # phen_with_m2samples <- phen_stat %>%
+  #   dplyr::filter(Sample_Num > 1)
+  # if(nrow(phen_with_m2samples) < 1){
+  #   print(paste("Error, each PatientID must has at least two or more samples!"))
+  #   return(NULL)
+  # }
   expr <- data %>%
     tibble::column_to_rownames(var = "gene_id")
-    # dplyr::select(-PatientID) %>%
-    # t() %>%
-    # as.data.frame()
 
+  pids <- unique(phen$PatientID)
   n <- length(pids)
   out <- do.call(rbind, lapply(seq_len(n), function(i) {
     # x = pid[1]

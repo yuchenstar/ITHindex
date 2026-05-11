@@ -39,20 +39,14 @@ calcPcaDiversity <- function(data,
 
     return(NULL)
   }
+  # 每个患者/样本至少要有2个以上cell
   phen_stat <- phen %>%
     dplyr::group_by(PatientID) %>%
     dplyr::summarise(Cell_Num = dplyr::n())
-
-  # 每个患者/样本至少要有2个以上cell
   phen_with_m2cells <- phen_stat %>%
     dplyr::filter(Cell_Num > 1)
-
   if(nrow(phen_with_m2cells) < 1){
     print(paste("Error, each PatientID must has at least two or more cellular samples (CellIDs))!"))
-
-    # message("Error, each PatientID must has at least two or more cellular samples (CellIDs))!")
-    # stop(message(paste0("Error, each PatientID must has at least two or more cellular samples (CellIDs))!")))
-
     return(NULL)
   }
 
@@ -60,11 +54,6 @@ calcPcaDiversity <- function(data,
   if (!is.data.frame(data) | length(grep(FALSE, data_cols %in% colnames(data))) != 0|ncol(data) < 3) {
     print(paste("Error, data must be a dataframe, and must contain the following columns: ",
                 paste(data_cols, collapse=""),", and sample names."))
-
-    # message("Error, data must be a dataframe, and contain the following columns: ",
-    #         paste(data_cols, collapse=" "))
-    # stop(message(paste0("Error, The mandatory fields: ",paste(data_cols, collapse=" "),"!")))
-
     return(NULL)
   }
 

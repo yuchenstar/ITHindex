@@ -10,6 +10,7 @@
 # ===============================================================================
 
 # Shiny UI -------
+source("R/home_upper_tab_ui.R", local = TRUE)
 ui <- fluidPage(
 
   shinyjs::useShinyjs(),
@@ -63,6 +64,7 @@ ui <- fluidPage(
           rintrojs::introBox(
             fluidRow(
               column(7, p(h3("", strong("ITHindex"), ""),style = "color:black;")), # 给一个空行
+              # column(12,home_upper_tab_ui),
               column(
                 12,
                 includeMarkdown("rmd/home.Rmd"),
@@ -147,36 +149,38 @@ ui <- fluidPage(
           column(8,
             align = "center",
             div(style = "height:10px;"), # 插入10px空行
-            p(
-              tags$a(
-                href="http://www.cams.ac.cn/",target = "_blank",
-                tags$img(src="xiehe_long.png",
-                         title="Chinese Academy of Medical Sciences & Peking Union Medical College",
-                         width="270",
-                         height="100")),
-              tags$a(
-                href="https://www.dgphospital.com/",target = "_blank",
-                tags$img(src="dongguan_long.png",
-                         title="The Tenth Affiliated Hospital of Southern Medical University",
-                         width="360",
-                         height="100")),
-              tags$a(
-                href="https://www.brbiotech.com/",target = "_blank",
-                tags$img(src="bnr.png",
-                         title="Burning Rock Dx",
-                         width="140",
-                         height="100"))
-            ),
-            p("Copyright © 2024 ",
+            # p(
+            #   tags$a(
+            #     href="http://www.cams.ac.cn/",target = "_blank",
+            #     tags$img(src="xiehe_long.png",
+            #              title="Chinese Academy of Medical Sciences & Peking Union Medical College",
+            #              width="270",
+            #              height="100")),
+            #   tags$a(
+            #     href="https://www.dgphospital.com/",target = "_blank",
+            #     tags$img(src="dongguan_long.png",
+            #              title="Affiliated Dongguan People's Hospital, Southern Medical University",
+            #              width="360",
+            #              height="100")),
+            #   tags$a(
+            #     href="https://www.brbiotech.com/",target = "_blank",
+            #     tags$img(src="bnr.png",
+            #              title="Burning Rock Dx",
+            #              width="140",
+            #              height="100"))
+            # ),
+            p("Copyright © ",
               # tags$a(href = "http://www.cams.ac.cn/", "Chinese Academy of Medical Sciences & Peking Union Medical College", target = "_blank"),
               # ", ",
-              # tags$a(href = "https://www.dgphospital.com/", "The Tenth Affiliated Hospital of Southern Medical University", target = "_blank"),
+              tags$a(href = "https://www.dgphospital.com/", "Affiliated Dongguan People's Hospital, Southern Medical University", target = "_blank"),
               # " and ",
               # tags$a(href = "https://www.brbiotech.com/", "Burning Rock Dx", target = "_blank"),
-              ". All Rights Reserved.",
+              ", China",
               style = "font-size:120%;color:white;"
             ),
-            p(tags$em("Version: 0.2.1, Last updated: Aug 2024"),
+            p(tags$em("Version: 0.2.3, updated: May 2026"),
+              style = "font-size:120%;color:white;"),
+            p(tags$em("Any comments and suggestions, please contact us"),
               style = "font-size:120%;color:white;")
           ),
           ## 新增用户统计

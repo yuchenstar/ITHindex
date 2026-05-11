@@ -383,7 +383,7 @@ assumptions: descriptive statistics, information theory (entropy), and
 spatial statistics (distance), as well as radiomic metrics on texture
 analysis, fractal analysis and wavelets (radiomic metrics are not
 integrated in ITHindex).</p>
-<p><strong>4. What is the Jaccard Similarity index?</strong></p>
+<p><strong>4. What is the Jaccard similarity index?</strong></p>
 <p>The Jaccard similarity index compares members for two sets to see
 which members are shared and which are distinct. It’s a measure of
 similarity for the two sets of data, with a range from 0% to 100%. The
@@ -394,7 +394,8 @@ set) * 100</p>
 <p><strong>5. What is the mutant-allele tumor heterogeneity
 (MATH)?</strong></p>
 <p>MATH is a descriptive statistics metric to quantify ITH based on the
-VAF distribution across all mutated loci.</p>
+VAF distribution across all mutated loci. MATH score is calculated by
+<code>inferHeterogenetiy</code> function (“maftools” package in R).</p>
 <p><strong>6. What is the proportion of clonality
 (pClonality)</strong></p>
 <p>The Cancer cell fraction (CCF) is the fraction of cancer cells from
@@ -414,7 +415,7 @@ population. It is calculated as:</p>
 <p><strong>8. What is the proportion of late-stage mutations
 (pLM)?</strong></p>
 <p>The proportion of late-stage mutations (pLM) is calculated based on
-proportion of late mutations inferred from EstimateClonality <span class="citation">(<a href="#ref-mcgranahanClonalStatusActionable2015"><strong>mcgranahanClonalStatusActionable2015?</strong></a>)</span>.</p>
+proportion of late mutations inferred from EstimateClonality.</p>
 <p><strong>9. What is the EstimateClonality?</strong></p>
 <p>The <a href="https://github.com/b-niu/EstimateClonality">EstimateClonality</a>
 is an R package which uses to determine the timing of SNVs for all
@@ -438,12 +439,11 @@ cellularity, is a proportion of cancer cells in a tumor containing the
 single-nucleotide variant, is commonly used to quantify tumor
 heterogeneity and evolution.</p>
 <p><strong>12. What is the Diversity score?</strong></p>
-<p>Diversity score <span class="citation">(<a href="#ref-yangMultiregionSequencingSpatial2022"><strong>yangMultiregionSequencingSpatial2022?</strong></a>)</span>
-is a measurement of ITH, which was calculated based on the gene
-expression profiles of signle cell within a tumor. PCA was applied in
-the scRNAseq data, and top N (default 30) PCs was selected, the
-diversity score of a tumor is aclculated as the average distance of all
-cells within the tumor to the centroid.</p>
+<p>Diversity score is a measurement of ITH, which was calculated based
+on the gene expression profiles of signle cell within a tumor. PCA was
+applied in the scRNAseq data, and top N (default 30) PCs was selected,
+the diversity score of a tumor is aclculated as the average distance of
+all cells within the tumor to the centroid.</p>
 <p><strong>13. What is the methylation entropy?</strong></p>
 <p>The methylation entropy is used to estimate the information content
 stored in a given set of CpG sites. Entropy is minimized when the

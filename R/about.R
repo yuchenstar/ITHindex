@@ -40,7 +40,10 @@ about_page <- dashboardBody(
         p(strong("Key Points: ")),
         p("- ITHindex integrate multiple algorithms for the quantification of intra-tumor heterogeneity."),
         p("- ITHindex can be used to evaluate multi-level ITH based on multi-omics data."),
-        p("- ITHindex provide a user-friendly platform for researchers to investigate the role of ITH in oncologic biology.")
+        p("- ITHindex provide a user-friendly platform for researchers to investigate the role of ITH in oncologic biology."),
+        p(strong("Attention: "),"As a downstream analytical calculator, ITHindex is inherently sensitive
+           to the quality of input data; therefore, rigorous upstream quality control—particularly in variant
+           calling and sequencing noise reduction—is essential to ensure the reliability of the derived ITH metrics.")
       )
     ),
   ## Contact us
@@ -56,18 +59,17 @@ about_page <- dashboardBody(
         style = "background-color:#ffffff;color:black;",# display:block;padding:10px;position:relative;
         p("If you have any trouble accessing any information on this website or have any further questions
           or feedback relating to the tool, then please contact us:"),
-        # p("Wenchuan Xie: ",tags$a(href = "wenchuan.xie@gmail.com", "wenchuan.xie@gmail.com", target = "_blank")),
         p(
-          mailtoR::mailtoR(email = "liuyutao@cicams.ac.cn",
-                           text = "Yutao Liu",
-                           subject = "Question of ITHindex",
+          # mailtoR::mailtoR(email = "liuyutao@cicams.ac.cn",
+          #                  text = "Yutao Liu",
+          #                  subject = "Suggestions of ITHindex",
+          #                  cc = c("wenchuan.xie@gmail.com"),
+          #                  body = ""),
+          # " or ",
+          mailtoR::mailtoR(email = "wenyqdoctor@163.com",
+                           text = "Yongqin Wen",
+                           subject = "Suggestions of ITHindex",
                            cc = c("wenchuan.xie@gmail.com"),
-                           body = ""),
-          " or ",
-          mailtoR::mailtoR(email = "wenchuan.xie@gmail.com",
-                           text = "Wenchuan Xie",
-                           subject = "Question of ITHindex",
-                           cc = c("wenchuan.xie@brbiotech.com"),
                            body = ""),
           use_mailtoR()
         ),

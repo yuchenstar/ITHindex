@@ -141,3 +141,49 @@ barPlot <- function(data){
   }
   return(p_list)
 }
+
+
+#' 过滤单样本患者并警告
+#' @param df 数据框，必须包含 patient_id 列
+#' @param patient_col 患者ID所在的列名，默认为 "patient_id"
+filter_single_sample_patients <- function(
+    df,
+    patient_col = "PatientID",
+    sample_col = "SampleID")
+  {
+  library(dplyr)
+  # 1. 计算每个患者的样本数量
+  patient_counts <- df %>%
+    dplyr::distinct(!!sym(patient_col),!!sym(sample_col))%>%
+    group_by(across(all_of(patient_col))) %>%
+    summarise(sample_count = n(), .groups = "drop")
+
+  # 2. 识别只有 1 个样本的患者
+  single_sample_patients <- patient_counts %>%
+    filter(sample_count == 1) %>%
+    pull(!!sym(patient_col))
+
+  # 3. 如果存在单样本患者，执行删除和告警
+  if (length(single_sample_patients) > 0) {
+    num_removed <- length(single_sample_patients)
+
+    # 触发 shinyalert 弹窗 (英文提示)
+    shinyalert::shinyalert(
+      title = "Single-Sample Patients Removed",
+      text = sprintf(
+        "%d patient(s) (%s) were removed because they have only one sample, which is insufficient for multi-region heterogeneity analysis.",
+        num_removed, paste(single_sample_patients, collapse = ", ")
+      ),
+      type = "warning"
+    )
+
+    # 执行过滤：只保留样本数 > 1 的患者数据
+    df_filtered <- df %>%
+      filter(!(!!sym(patient_col) %in% single_sample_patients))
+
+    return(df_filtered)
+  }
+
+  # 如果没有单样本患者，原样返回
+  return(df)
+}

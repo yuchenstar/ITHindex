@@ -6,9 +6,11 @@ output: html_document
 runtime: shiny
 ---
 
-<span style="color:black;">**ITHindex**</span> (intra-tumor heterogeneity[ITH] index) is a interactive web tool dedicated to ITH quantification by using various measurements based on the profiling of genomic, transcriptomic and epigenetic features from single/multi-regional sequencing, spatial transcriptomics, or single-cell sequencing.
+<span style="color:black;">**ITHindex**</span> (intra-tumor heterogeneity[ITH] index) is an interactive web-based platform designed for the systematic quantification of ITH by integrating diverse algorithmic frameworks across genomic, transcriptomic, and epigenetic dimensions.
 
-Within ITHindex, users can quickly get the various ITH metrics by different algorithms, including genetic heterogeneity, transcriptomic heterogeneity, proteomic heterogeneity and epigenetic heterogeneity, assisting researchers in further investigating the mechanism of tumor progression, metastasis and improving clinical decision-making.
+By providing a unified interface to calculate multi-dimensional ITH scores — encompassing genetic, transcriptomic, proteomic, and epigenetic heterogeneity — ITHindex serves as a research-enabling tool to assist researcher in exploring the mechanisms of tumor progression and metastasis.
+
+
 
 
 

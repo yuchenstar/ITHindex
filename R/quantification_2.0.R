@@ -13,6 +13,8 @@
 # List contain ui and server of page
 ith_quantification_page <- list()
 
+placeholder_text = "Maximum 50MB allowed"
+
 quantification_page <- dashboardBody(
   # br(),
   # fluidRow(
@@ -379,10 +381,11 @@ quantification_page <- dashboardBody(
                      ")"
 
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
-                 )
+                 ) #,helpText("Note: Only files smaller than 50MB are accepted.")
                 ),
                conditionalPanel(
                  # 1.2 MAD
@@ -398,6 +401,7 @@ quantification_page <- dashboardBody(
                      )),
                      ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -423,6 +427,7 @@ quantification_page <- dashboardBody(
                      )),
                      ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -441,6 +446,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -464,6 +470,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -478,6 +485,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv")
@@ -503,6 +511,7 @@ quantification_page <- dashboardBody(
                      )),
                      ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -521,6 +530,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -535,6 +545,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv")
@@ -558,6 +569,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -583,6 +595,7 @@ quantification_page <- dashboardBody(
                      )),
                      ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -605,6 +618,7 @@ quantification_page <- dashboardBody(
                      )),
                      ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -621,6 +635,7 @@ quantification_page <- dashboardBody(
                          icon = icon("file")
                        )), ")"
                      ),
+                     placeholder = placeholder_text,
                      multiple = FALSE,
                      width = "100%",
                      accept = c(".txt", ".tsv", ".csv"),
@@ -640,6 +655,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -658,6 +674,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -672,6 +689,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -694,6 +712,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -712,6 +731,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -734,6 +754,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -752,6 +773,7 @@ quantification_page <- dashboardBody(
                        icon = icon("file")
                      )), ")"
                    ),
+                   placeholder = placeholder_text,
                    multiple = FALSE,
                    width = "100%",
                    accept = c(".txt", ".tsv", ".csv"),
@@ -813,6 +835,14 @@ quantification_page <- dashboardBody(
       ),
       background = "black",
       style = "background-color:#ffffff;color:black;",
+      fluidRow(
+        column(12,
+               div(
+                 style = "margin-bottom: 5px;",
+                 uiOutput("ui_params_display_box") # 动态渲染参数显示区域
+               )
+        )
+      ),
       fluidRow(
         column(6,
                style = "margin-top:20px;",
@@ -1703,6 +1733,7 @@ ith_quantification_page$server <- function(input, output, session) {
   # reset output contents ------------------------------------------------------
   observeEvent(input$run_reset, {
     shinyjs::reset("quantification_page_id")
+    output[["ui_params_display_box"]] <- NULL
     output[["ui_ith_output_table"]] <- NULL
     output[["ui_ith_output_graphic"]] <- NULL
     output[["dl_ui_ith_output_table"]] <- NULL
@@ -1712,7 +1743,7 @@ ith_quantification_page$server <- function(input, output, session) {
   observeEvent(input$ith_data_type, {
     shinyjs::reset("ith_algorithm")
     output[["ith_output_table"]] <- NULL
-    # output[["dl_ith_output_table"]] <- NULL
+    output[["ui_params_display_box"]] <- NULL
     output[["ui_ith_output_table"]] <- NULL
     output[["ui_ith_output_graphic"]] <- NULL
     output[["dl_ui_ith_output_table"]] <- NULL
@@ -1721,7 +1752,7 @@ ith_quantification_page$server <- function(input, output, session) {
   })
   observeEvent(input$ith_algorithm, {
     output[["ith_output_table"]] <- NULL
-    # output[["dl_ith_output_table"]] <- NULL
+    output[["ui_params_display_box"]] <- NULL
     output[["ui_ith_output_table"]] <- NULL
     output[["ui_ith_output_graphic"]] <- NULL
     output[["dl_ui_ith_output_table"]] <- NULL
@@ -1729,6 +1760,81 @@ ith_quantification_page$server <- function(input, output, session) {
     output[["ui_input_data"]] <- NULL
   })
 
+  # Monitor uploaded file size ----
+  # observeEvent(input$file_mutation_jaccard, {
+  #   # 调用函数：如果不通过则停止执行
+  #   req(check_file_size(input$file_mutation_jaccard))
+  #   # 通过校验后的逻辑...
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_mutation_mad, {
+  #   req(check_file_size(input$file_mutation_mad))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_mutation_entropy, {
+  #   req(check_file_size(input$file_mutation_entropy))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_mutation_ratio, {
+  #   req(check_file_size(input$file_mutation_ratio))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_segment_distance, {
+  #   req(check_file_size(input$file_segment_distance))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_purity_ploidy, {
+  #   req(check_file_size(input$file_purity_ploidy))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_segment_entropy, {
+  #   req(check_file_size(input$file_segment_entropy))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_ec_segment, {
+  #   req(check_file_size(input$file_ec_segment))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_ec_mutation, {
+  #   req(check_file_size(input$file_ec_mutation))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_expression_entropy, {
+  #   req(check_file_size(input$file_expression_entropy))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_expression_pca, {
+  #   req(check_file_size(input$file_expression_pca))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_meta_pca, {
+  #   req(check_file_size(input$file_meta_pca))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_coordinate_pca, {
+  #   req(check_file_size(input$file_coordinate_pca))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_expression_sd, {
+  #   req(check_file_size(input$file_expression_sd))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_expression_distance, {
+  #   req(check_file_size(input$file_expression_distance))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_expression_distance_meta, {
+  #   req(check_file_size(input$file_expression_distance_meta))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_methylation_entropy, {
+  #   req(check_file_size(input$file_methylation_entropy))
+  #   print("File passed size check.")
+  # })
+  # observeEvent(input$file_methylation_sd, {
+  #   req(check_file_size(input$file_methylation_sd))
+  #   print("File passed size check.")
+  # })
   # Visualize the upload data ----
   observe({
     ## 1. Muation
@@ -2372,13 +2478,16 @@ ith_quantification_page$server <- function(input, output, session) {
           in_data <- data.table::fread(input_file_expression_distance)
           in_meta <- data.table::fread(input_file_expression_distance_meta)
 
-          ith_index <- lpy_MPD(in_data,in_meta,
-                                           pca = input_distance_expression_toppc_value,
-                                           nPCs = input_distance_expression_pc_number(),
-                                           method = input_distance_expression_method())
+          ith_index <- lpy_MPD(
+            in_data,in_meta,
+            pca = input_distance_expression_toppc_value,
+            nPCs = input_distance_expression_pc_number(),
+            method = input_distance_expression_method()
+          )
           ith_index$sMPD <- func_2zeroone(ith_index$MPD) %>% round(4)
+          # ith_index$sMPD <- ith_index$MPD
           ith_index %<>%
-            dplyr::select(PatientID,sMPD)
+            dplyr::select(PatientID,sMPD,MPD)
         }
       }
       # 4. Methylation
@@ -2916,11 +3025,13 @@ ith_quantification_page$server <- function(input, output, session) {
       })
 
       # 2.3 ITH计算 ----
+      ith_parms <- list()
       ith_index <- data.frame()
       # 1. Mutation(VAF/CCF)
-      # 1. Mutation(VAF/CCF)
       if (input_ith_data_type() == "VAF_CCF") {
+        ith_parms[["Data type"]] = "Mutation"
         if (input_ith_algorithm() == "jaccardSimilarity"){
+          ith_parms[["Algorithm"]] = "Jaccard Similarity"
           if (input_file_mutation_jaccard() == "" || is.null(input_file_mutation_jaccard())) {
             shinyalert::shinyalert(
               title = "Missing file!",
@@ -2939,11 +3050,22 @@ ith_quantification_page$server <- function(input, output, session) {
               )
             }else{
               message("input -- calculate the jaccard similarity!")
-              ith_index <- lpy_JaccardSimilarity(in_data)
+              filter_data <- filter_single_sample_patients(in_data,"PatientID","SampleID")
+              if (nrow(filter_data) == 0) {
+                shinyalert::shinyalert(
+                  title = "Analysis Terminated",
+                  text = "No patients with multiple samples found. Analysis cannot proceed.",
+                  type = "error"
+                )
+              }else{
+                ith_index <- lpy_JaccardSimilarity(filter_data)
+              }
+
             }
           }
         }
         if (input_ith_algorithm() == "MAD"){
+          ith_parms[["Algorithm"]] = "MATH"
           if (input_file_mutation_mad() == "" || is.null(input_file_mutation_mad())) {
             shinyalert::shinyalert(
               title = "Missing file!",
@@ -2971,7 +3093,11 @@ ith_quantification_page$server <- function(input, output, session) {
           }
         }
         if (input_ith_algorithm() == "mutationEntropy"){
-
+          ith_parms[["Algorithm"]] = "Shannon entropy"
+          ith_parms[["Number of bins"]] = input_entropy_nbin()
+          ith_parms[["Adjusted by max VAF/CCF"]] = input_entropy_adjusted_value
+          ith_parms[["Weighted"]]   = input_entropy_weighted_value
+          ith_parms[["Values of weighted"]]   = paste0(input_entropy_weighted_vector(),collapse = ", ")
           if (input_file_mutation_entropy() == "" || is.null(input_file_mutation_entropy())) {
             shinyalert::shinyalert(
               title = "Missing file!",
@@ -3008,7 +3134,8 @@ ith_quantification_page$server <- function(input, output, session) {
 
         }
         if (input_ith_algorithm() == "Ratio"){
-
+          ith_parms[["Algorithm"]] = "pClonality"
+          ith_parms[["CCF cutoff that defined clonal"]] = input_ratio_cutoff()
           if (input_file_mutation_ratio() == "" || is.null(input_file_mutation_ratio())) {
             shinyalert::shinyalert(
               title = "Missing file!",
@@ -3035,8 +3162,9 @@ ith_quantification_page$server <- function(input, output, session) {
       }
       # 2. CNV
       if(input_ith_data_type() == "Segment"){
+        ith_parms[["Data type"]] = "Copy Number Variation"
         if (input_ith_algorithm() == "segmentCNH"){
-
+          ith_parms[["Algorithm"]] = "CNHplus"
           if (input_file_segment_distance() == "" || is.null(input_file_segment_distance())) {
             shinyalert::shinyalert(
               title = "Missing segment file!",
@@ -3120,7 +3248,10 @@ ith_quantification_page$server <- function(input, output, session) {
 
         }
         if (input_ith_algorithm() == "segmentEntropy"){
-
+          ith_parms[["Algorithm"]] = "Shannon entropy"
+          ith_parms[["Minimum number of probes for a segment"]] = input_segment_entropy_minprobes()
+          ith_parms[["Minimum segment size (in kb) for a segment"]] = input_segment_entropy_minkb()
+          ith_parms[["Number of bins"]]   = input_segment_entropy_nbin()
           if (input_file_segment_entropy() == "" || is.null(input_file_segment_entropy())) {
             shinyalert::shinyalert(
               title = "Missing file!",
@@ -3179,7 +3310,7 @@ ith_quantification_page$server <- function(input, output, session) {
 
         }
         if (input_ith_algorithm() == "EstimateClonality"){
-
+          ith_parms[["Algorithm"]] = "Proportion of late-stage mutations (pLM)"
           if (input_file_ec_mutation() == "" || is.null(input_file_ec_mutation()) ||
               input_file_ec_segment() == ""  || is.null(input_file_ec_segment())) {
             shinyalert::shinyalert(
@@ -3214,8 +3345,10 @@ ith_quantification_page$server <- function(input, output, session) {
       }
       # 3. RNAexpression/Protein
       if(input_ith_data_type() == "Expression"){
+        ith_parms[["Data type"]] = "RNA Expression/Protein Abundance"
         if (input_ith_algorithm() == "expressionEntropy"){
-
+          ith_parms[["Algorithm"]] = "Shannon entropy"
+          ith_parms[["Adjusted by features number"]] = as.character(input_expression_entropy_normalized_value)
           if (input_file_expression_entropy() == "" || is.null(input_file_expression_entropy())) {
             shinyalert::shinyalert(
               title = "Missing file!",
@@ -3236,15 +3369,21 @@ ith_quantification_page$server <- function(input, output, session) {
               message("input -- calculate the Diversity score!")
               in_data <- in_data %>%
                 tibble::column_to_rownames(var = 'gene_id')
-              ith_index <- data.frame("Diversity_score" = calcExprEntropy(in_data,
-                                                                          norm = input_expression_entropy_normalized_value)) %>%
+              ith_index <- data.frame("Diversity_score" =
+                                        calcExprEntropy(in_data,
+                                                        norm = input_expression_entropy_normalized_value)) %>%
                 tibble::rownames_to_column(var = 'SampleID') %>%
                 dplyr::select(SampleID,`Shannon entropy` = Diversity_score)
             }
           }
         }
         if (input_ith_algorithm() == "Diversity_Multiregional_scRNAseq"){
-
+          ith_parms[["Algorithm"]] = "Diversity score"
+          ith_parms[["Selected top PC"]] = as.character(input_pca_expression_toppc_value)
+          ith_parms[["Number of PC"]] = input_pca_expression_pc_number()
+          ith_parms[["Remove the extreme PC value"]] = as.character(selected_pca_expression_rm_outlier_value)
+          ith_parms[["SD times"]] = input_pca_expression_sd_times()
+          ith_parms[["Percent cutoff"]] = input_sample_drop_percent()
           if (input_file_expression_pca() == "" || is.null(input_file_expression_pca())||
               input_file_meta_pca() == "" || is.null(input_file_meta_pca())) {
             shinyalert::shinyalert(
@@ -3316,19 +3455,32 @@ ith_quantification_page$server <- function(input, output, session) {
             }
             if(runDiv){
               message("input -- calculate the Diversity score!")
-              ith_index <- calcPcaDiversity(in_data,
-                                            in_meta,
-                                            topPC = input_pca_expression_toppc_value,
-                                            nPCs = input_pca_expression_pc_number(),
-                                            rmOutlier = selected_pca_expression_rm_outlier_value,
-                                            sdTimes = input_pca_expression_sd_times(),
-                                            sampleDropPercent = input_sample_drop_percent(),
-                                            coordinate = in_coord)
+              filter_meta_data <- filter_single_sample_patients(in_meta,"PatientID","SampleID")
+              if (nrow(filter_meta_data) == 0) {
+                shinyalert::shinyalert(
+                  title = "Analysis Terminated",
+                  text = "No patients with multiple samples found. Analysis cannot proceed.",
+                  type = "error"
+                )
+              }else{
+                filter_expr_data <- in_data %>%
+                  dplyr::select(hugo_symbol,all_of(filter_meta_data$SampleID))
+                ith_index <- calcPcaDiversity(
+                  filter_expr_data,
+                  filter_meta_data,
+                  topPC = input_pca_expression_toppc_value,
+                  nPCs = input_pca_expression_pc_number(),
+                  rmOutlier = selected_pca_expression_rm_outlier_value,
+                  sdTimes = input_pca_expression_sd_times(),
+                  sampleDropPercent = input_sample_drop_percent(),
+                  coordinate = in_coord
+                )
+              }
             }
           }
         }
         if (input_ith_algorithm() == "SD"){
-
+          ith_parms[["Algorithm"]] = "Standard deviations"
           if (input_file_expression_sd() == "" || is.null(input_file_expression_sd())) {
             shinyalert::shinyalert(
               title = "Missing file!",
@@ -3356,6 +3508,10 @@ ith_quantification_page$server <- function(input, output, session) {
 
         }
         if (input_ith_algorithm() == "sMPD_Multiregional"){
+          ith_parms[["Algorithm"]] = "Scaled mean pairwise distance (sMPD)"
+          ith_parms[["Selected top PC"]] = as.character(input_distance_expression_toppc_value)
+          ith_parms[["Number of PC"]] = input_distance_expression_pc_number()
+          ith_parms[["Method used fo measure distance"]] = input_distance_expression_method()
 
           if (input_file_expression_distance() == "" || is.null(input_file_expression_distance())||
               input_file_expression_distance_meta() == "" || is.null(input_file_expression_distance_meta())) {
@@ -3401,13 +3557,27 @@ ith_quantification_page$server <- function(input, output, session) {
 
             if(runMPD){
               message("input -- calculate the sMPD!")
-              ith_index <- lpy_MPD(in_data,in_meta,
-                                               pca = input_distance_expression_toppc_value,
-                                               nPCs = input_distance_expression_pc_number(),
-                                               method = input_distance_expression_method())
-              ith_index$sMPD <- func_2zeroone(ith_index$MPD) %>% round(4)
-              ith_index %<>%
-                dplyr::select(PatientID,sMPD)
+              filter_meta_data <- filter_single_sample_patients(in_meta,"PatientID","SampleID")
+              if (nrow(filter_meta_data) == 0) {
+                shinyalert::shinyalert(
+                  title = "Analysis Terminated",
+                  text = "No patients with multiple samples found. Analysis cannot proceed.",
+                  type = "error"
+                )
+              }else{
+                filter_expr_data <- in_data %>%
+                  dplyr::select(gene_id,all_of(filter_meta_data$SampleID))
+                ith_index <- lpy_MPD(filter_expr_data,filter_meta_data,
+                                     pca = input_distance_expression_toppc_value,
+                                     nPCs = input_distance_expression_pc_number(),
+                                     method = input_distance_expression_method())
+                # 对于三粒以下Patients时，scale后的结果只有0，1！
+                # 因此scale的话要求数据要3例Patient或以上
+                ith_index$sMPD <- func_2zeroone(ith_index$MPD) %>% round(4)
+                # ith_index$sMPD <- ith_index$MPD
+                ith_index %<>%
+                  dplyr::select(PatientID,sMPD,MPD)
+              }
             }
           }
 
@@ -3415,7 +3585,9 @@ ith_quantification_page$server <- function(input, output, session) {
       }
       # 4. Methylation
       if(input_ith_data_type() == "Methylation") {
+        ith_parms[["Data type"]] = "Methylation"
         if (input_ith_algorithm() == "methylationEntropy"){
+          ith_parms[["Algorithm"]] = "Shannon entropy"
           if (input_file_methylation_entropy() == "" || is.null(input_file_methylation_entropy())) {
             shinyalert::shinyalert(
               title = "Missing file!",
@@ -3439,6 +3611,7 @@ ith_quantification_page$server <- function(input, output, session) {
           }
         }
         if (input_ith_algorithm() == "SD"){
+          ith_parms[["Algorithm"]] = "Standard deviations"
           if (input_file_methylation_sd() == "" || is.null(input_file_methylation_sd())) {
             shinyalert::shinyalert(
               title = "Missing file!",
@@ -3488,6 +3661,43 @@ ith_quantification_page$server <- function(input, output, session) {
       }
 
       # output$ith_output_graphic <- renderPlot(print(p_out))
+
+      # 展示使用的参数
+      output$ui_params_display_box <- renderUI({
+        # req()
+        wellPanel(
+          style = "background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 8px;",
+          fluidRow(
+            column(12,
+                   tags$h4(style = "margin-top: 0; color: #2c3e50; font-size: 16px; font-weight: bold;",
+                           icon("cog"), " Analysis Parameters"),
+                   hr(style = "margin: 10px 0;"),
+                   tags$div(
+                     # style = "display: flex; flex-wrap: wrap; gap: 10px;",
+                     style = "display: flex; flex-wrap: wrap; gap: 8px; align-items: center;",
+                     lapply(names(ith_parms), function(key) {
+                       val <- ith_parms[[key]]
+
+                       # 为每个参数生成一个组合标签
+                       tags$div(
+                         style = "display: flex; border: 1px solid #dcdde1; border-radius: 4px; overflow: hidden; font-size: 13px;",
+                         # Key 部分 (深色背景)
+                         tags$span(
+                           style = "background: #edeff1; color: #2f3640; padding: 4px 10px; font-weight: 600; border-right: 1px solid #dcdde1;",
+                           key
+                         ),
+                         # Value 部分 (浅色背景)
+                         tags$span(
+                           style = "background: #ffffff; color: #1976d2; padding: 4px 10px;",
+                           val
+                         )
+                       )
+                     })
+                   )
+            )
+          )
+        )
+      })
 
       output[["dl_ith_output_table"]] <- downloadHandler(
         filename = function() {

@@ -91,13 +91,20 @@ cbsDiv <- function(data, minprobes=100, minkb=1000, nbins=10,
 
   sids <- unique(segments$SampleID)
 
-  if (ncores == 1) {
-    res <- unlist(lapply(sids, calcCbsDiv, segments=segments, nbins=nbins, method=method, norm=norm,
-                         maxrad=maxrad, radinc=radinc, fixedmin=fixedmin, fixedmax=fixedmax, n = length(sids),show_progress = show_progress))
-  } else {
-    res <- unlist(mclapply(sids, calcCbsDiv, segments=segments, nbins=nbins, method=method, norm=norm,
-                           maxrad=maxrad, radinc=radinc, fixedmin=fixedmin, fixedmax=fixedmax, mc.cores=ncores))
-  }
+  # if (ncores == 1) {
+  #   res <- unlist(lapply(sids, calcCbsDiv, segments=segments, nbins=nbins, method=method, norm=norm,
+  #                        maxrad=maxrad, radinc=radinc, fixedmin=fixedmin, fixedmax=fixedmax,
+  #                        n = length(sids),show_progress = show_progress))
+  # } else {
+  #   res <- unlist(mclapply(sids, calcCbsDiv, segments=segments, nbins=nbins, method=method, norm=norm,
+  #                          maxrad=maxrad, radinc=radinc, fixedmin=fixedmin, fixedmax=fixedmax, mc.cores=ncores))
+  # }
+  res <- unlist(lapply(seq_len(length(sids)),function(i){
+    sid = sids[i]
+    res <- calcCbsDiv(sid, segments=segments, nbins=nbins, method=method, norm=norm,
+                      maxrad=maxrad, radinc=radinc, fixedmin=fixedmin, fixedmax=fixedmax,
+                      n = length(sids),show_progress = show_progress,i)
+  }))
   names(res) <- sids
   return(res)
 }
@@ -108,8 +115,7 @@ ninbin <- function(bin, data, binmin, binmax, binsize) {
                  data < seq(binmin, binmax, binsize)[bin+1]))
 }
 ## Subfunction, calculate the score per sample.
-calcCbsDiv <- function(sampleid, segments, nbins, method, norm, maxrad, radinc, fixedmin, fixedmax, n, show_progress) {
-  ##print(sampleid)
+calcCbsDiv <- function(sampleid, segments, nbins, method, norm, maxrad, radinc, fixedmin, fixedmax, n, show_progress, i = 1) {
 
   if (show_progress) {
     update_modal_progress(

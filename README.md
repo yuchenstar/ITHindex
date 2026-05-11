@@ -11,3 +11,9 @@ Key Points:
 - ITHindex can be used to evaluate multi-level ITH based on multi-omics data.
 
 - ITHindex provide a user-friendly platform for researchers to investigate the role of ITH in oncologic biology.
+
+
+Attention: As a downstream analytical calculator, ITHindex is inherently sensitive to the quality of input data; therefore, rigorous upstream quality control—particularly in variant calling and sequencing noise reduction—is essential to ensure the reliability of the derived ITH metrics.
+
+
+

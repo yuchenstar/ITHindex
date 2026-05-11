@@ -4,7 +4,7 @@ author: "Wenchuan Xie"
 date: "6/28/2024"
 output: html_document
 # runtime: shiny
-link-citations: yes
+link-citations: true
 bibliography: ../data/lib/ITHindex.bib
 csl: ../data/lib/cancer-discovery.csl
 ---

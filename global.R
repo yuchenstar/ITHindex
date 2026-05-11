@@ -20,6 +20,14 @@ if(F){
   # gcc --version
   # g++ --version
 }
+
+options(repos = c(
+  CRAN = "https://cran.rstudio.com/",
+  BioC = "https://bioconductor.org/packages/3.21/bioc", # 这里的版本号需对应你的R版本
+  data_annotation = "https://bioconductor.org/packages/3.21/data/annotation",
+  data_experiment = "https://bioconductor.org/packages/3.21/data/experiment"
+))
+
 # 输出文件前缀
 ith_prefix <- 'ITHindex'
 
