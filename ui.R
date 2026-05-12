@@ -172,7 +172,7 @@ ui <- fluidPage(
             p("Copyright © ",
               # tags$a(href = "http://www.cams.ac.cn/", "Chinese Academy of Medical Sciences & Peking Union Medical College", target = "_blank"),
               # ", ",
-              tags$a(href = "https://www.dgphospital.com/", "Affiliated Dongguan People's Hospital, Southern Medical University", target = "_blank"),
+              tags$a(href = "https://med.szu.edu.cn/en/faculty/general", "Shenzhen University of Advanced Technology General Hospital", target = "_blank"),
               # " and ",
               # tags$a(href = "https://www.brbiotech.com/", "Burning Rock Dx", target = "_blank"),
               ", China",
